@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Homepage</title>
+    <link rel="stylesheet" href="/style/common.css" />
+  </head>
+  <body>
+    <h1>Stats</h1>
+
+    <p>Here are the 10 most visited pages on my website:</p>
+    <ol>
+      {% for page in pages %}
+      <li>
+        <a href="{{ page.url }}">{{ page.url }}</a>
+        &ndash; {{ page.views }} views
+      </li>
+      {% endfor %}
+    </ol>
+
+    <p><em>Wow, isn't technology just amazing!</em></p>
+
+    <hr />
+    <footer>
+      <a href="https://github.com/basicprogrammer10/afire">
+        <img src="./assets/afire.png" />
+      </a>
+      <img src="./assets/ie2.gif" />
+      <p>Connor Slade &ndash; 1992</p>
+    </footer>
+  </body>
+</html>

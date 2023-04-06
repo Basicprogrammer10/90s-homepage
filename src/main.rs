@@ -13,6 +13,7 @@ use crate::db::Database;
 
 mod app;
 mod db;
+mod pages;
 mod stats;
 
 fn main() {
@@ -25,6 +26,8 @@ fn main() {
     Logger::new().attach(&mut server);
     ServeStatic::new("./web/static").attach(&mut server);
     Stats::new(app.clone()).attach(&mut server);
+
+    pages::attach(&mut server);
 
     ctrlc::set_handler(move || {
         println!("{}", "[*] Exiting".yellow());

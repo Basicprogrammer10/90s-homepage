@@ -5,6 +5,7 @@ pub trait Database {
     fn init(&self);
     fn cleanup(&self);
     fn log_request(&self, req: &Request);
+    fn top_pages(&self, count: u32) -> Vec<StatEntry>;
 }
 
 impl Database for Connection {
@@ -36,4 +37,25 @@ impl Database for Connection {
         )
         .unwrap();
     }
+
+    fn top_pages(&self, count: u32) -> Vec<StatEntry> {
+        let mut stmt = self
+            .prepare(
+                "SELECT path, count FROM stats
+                WHERE method = 'GET' AND (path LIKE '%/' OR path LIKE '%.html')
+                ORDER BY count DESC LIMIT ?",
+            )
+            .unwrap();
+
+        stmt.query_map([count], |row| Ok((row.get(0)?, row.get(1)?)))
+            .unwrap()
+            .map(Result::unwrap)
+            .map(|(url, views)| StatEntry { url, views })
+            .collect()
+    }
+}
+
+pub struct StatEntry {
+    pub url: String,
+    pub views: u32,
 }
