@@ -1,0 +1,28 @@
+body {
+  width: 50vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+a {
+  color: blue;
+}
+
+p {
+  text-align: justify;
+}
+
+footer {
+    width: 50vw;
+    display: flex;
+}
+
+footer img {
+    margin-right: 5px;
+}
+
+footer p {
+    margin: 0;
+    margin-left: auto;
+}
