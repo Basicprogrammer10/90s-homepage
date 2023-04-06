@@ -5,3 +5,5 @@ edition = "2021"
 
 [dependencies]
 afire = {version = "2.0.0", features = ["extensions", "tracing"]}
+parking_lot = "0.12.1"
+rusqlite = "0.29.0"
