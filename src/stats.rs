@@ -1,12 +1,11 @@
 use std::sync::Arc;
 
-use afire::{trace, Middleware, Server};
-use parking_lot::Mutex;
+use afire::{Middleware, Request, Response};
 
-use crate::app::App;
+use crate::{app::App, db::Database};
 
 pub struct Stats {
-    app: Arc<App>,
+    pub app: Arc<App>,
 }
 
 impl Stats {
@@ -15,4 +14,8 @@ impl Stats {
     }
 }
 
-impl Middleware for Stats {}
+impl Middleware for Stats {
+    fn end(&self, req: &Request, _res: &Response) {
+        self.app.db().log_request(&req);
+    }
+}

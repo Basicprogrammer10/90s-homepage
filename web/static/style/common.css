@@ -1,5 +1,5 @@
 body {
-  width: 50vw;
+  width: min(90vw, 1000px);
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -14,16 +14,16 @@ p {
 }
 
 footer {
-    width: 50vw;
-    display: flex;
-    height: 15px;
+  width: min(90vw, 1000px);
+  display: flex;
+  height: 15px;
 }
 
 footer img {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 footer p {
-    margin: 0;
-    margin-left: auto;
+  margin: 0;
+  margin-left: auto;
 }
