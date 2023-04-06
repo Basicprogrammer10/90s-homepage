@@ -1,12 +1,13 @@
 use std::{net::Ipv4Addr, process};
 
 use afire::{
-    extension::{Logger, ServeStatic},
+    extension::Logger,
     trace::{self, Level},
     Middleware, Server,
 };
 use app::App;
 use owo_colors::OwoColorize;
+use serve_static::ServeStatic;
 use stats::Stats;
 
 use crate::db::Database;
@@ -14,6 +15,7 @@ use crate::db::Database;
 mod app;
 mod db;
 mod pages;
+mod serve_static;
 mod stats;
 
 fn main() {
