@@ -16,6 +16,7 @@ p {
 footer {
     width: 50vw;
     display: flex;
+    height: 15px;
 }
 
 footer img {
