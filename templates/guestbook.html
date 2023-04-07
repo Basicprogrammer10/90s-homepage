@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Homepage</title>
+    <link rel="stylesheet" href="/style/common.css" />
+
+    <style>
+      blockquote {
+        border-left: solid 1px black;
+        padding-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <p><a href="/">home</a> &rsaquo; stats</p>
+
+    <h1>Guest Book</h1>
+
+    <form action="/guestbook" method="post">
+      <label for="name">Name:</label>
+      <br />
+      <input type="text" name="name" id="name" required />
+      <br />
+      <br />
+      <label for="message">Message:</label>
+      <br />
+      <textarea name="message" id="message" cols="60" rows="5"></textarea>
+      <br />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <hr />
+
+    {% for entry in entries %}
+    <blockquote>
+      {{entry.message}}
+      <br />
+      - {{entry.name}} ({{entry.date}})
+    </blockquote>
+    {% endfor %}
+
+    <p><em>Wow, isn't technology just amazing!</em></p>
+
+    <hr />
+    <footer>
+      <a href="https://github.com/basicprogrammer10/afire">
+        <img src="./assets/afire.png" />
+      </a>
+      <img src="./assets/ie2.gif" />
+      <p>Connor Slade &ndash; 1992</p>
+    </footer>
+  </body>
+</html>
