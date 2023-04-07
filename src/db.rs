@@ -1,5 +1,5 @@
 use afire::Request;
-use rusqlite::{params, Connection};
+use rusqlite::Connection;
 
 pub trait Database {
     fn init(&self);
@@ -12,10 +12,9 @@ impl Database for Connection {
     fn init(&self) {
         self.execute(
             "CREATE TABLE IF NOT EXISTS stats (
-                method TEXT NOT NULL,
                 path TEXT NOT NULL,
                 count INTEGER NOT NULL,
-                UNIQUE (method, path)
+                UNIQUE (path)
             )",
             [],
         )
@@ -31,9 +30,9 @@ impl Database for Connection {
 
     fn log_request(&self, req: &Request) {
         self.execute(
-            "INSERT INTO stats (method, path, count) VALUES (?, ?, 1)
-            ON CONFLICT (method, path) DO UPDATE SET count = count + 1",
-            params![req.method.to_string(), req.path],
+            "INSERT INTO stats (path, count) VALUES (?, 1)
+            ON CONFLICT (path) DO UPDATE SET count = count + 1",
+            [&req.path],
         )
         .unwrap();
     }
@@ -42,7 +41,6 @@ impl Database for Connection {
         let mut stmt = self
             .prepare(
                 "SELECT path, count FROM stats
-                WHERE method = 'GET' AND (path LIKE '%/' OR path LIKE '%.html')
                 ORDER BY count DESC LIMIT ?",
             )
             .unwrap();

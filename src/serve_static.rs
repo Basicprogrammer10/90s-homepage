@@ -30,8 +30,6 @@ impl ServeStatic {
             }
         }
 
-        dbg!(html_cache.clone());
-
         Self {
             data_dir: dir,
             serve_path: "/".to_owned() + "**",
@@ -40,7 +38,8 @@ impl ServeStatic {
     }
 
     pub fn attach(self, server: &mut Server<App>) {
-        server.route(Method::GET, &self.serve_path.to_owned(), move |req| {
+        let serve_path = self.serve_path.to_owned();
+        server.route(Method::GET, serve_path, move |req| {
             let path = safe_path(
                 req.path
                     .strip_prefix(&self.serve_path)

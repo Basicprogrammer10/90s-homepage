@@ -22,3 +22,11 @@ pub fn attach(server: &mut Server<App>) {
         Response::new().text(template.render().unwrap())
     });
 }
+
+mod filters {
+    use askama::Result;
+
+    pub fn length<T>(s: &[T]) -> Result<String> {
+        Ok(s.len().to_string())
+    }
+}

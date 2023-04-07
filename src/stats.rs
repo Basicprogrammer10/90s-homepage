@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use afire::{Middleware, Request, Response};
+use afire::{prelude::MiddleResult, Middleware, Request, Response, Status};
 
 use crate::{app::App, db::Database};
 
@@ -15,7 +15,12 @@ impl Stats {
 }
 
 impl Middleware for Stats {
-    fn end(&self, req: &Request, _res: &Response) {
-        self.app.db().log_request(&req);
+    fn post(&self, req: &Request, res: &mut Response) -> MiddleResult {
+        if req.path.contains('.') || res.status != Status::Ok {
+            return MiddleResult::Continue;
+        }
+
+        self.app.db().log_request(req);
+        MiddleResult::Continue
     }
 }

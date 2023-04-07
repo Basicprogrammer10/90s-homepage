@@ -8,13 +8,17 @@
     <link rel="stylesheet" href="/style/common.css" />
   </head>
   <body>
+    <p><a href="/">home</a> &rsaquo; stats</p>
+
     <h1>Stats</h1>
 
-    <p>Here are the 10 most visited pages on my website:</p>
+    <p>Here are the {{ pages|length }} most visited pages on my website:</p>
     <ol>
       {% for page in pages %}
       <li>
-        <a href="{{ page.url }}">{{ page.url }}</a>
+        <a href="{{ page.url }}">
+          {% if page.url == "/" %} home {% else %} {{ page.url }} {% endif %}
+        </a>
         &ndash; {{ page.views }} views
       </li>
       {% endfor %}

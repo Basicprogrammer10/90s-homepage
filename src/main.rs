@@ -14,9 +14,12 @@ use crate::db::Database;
 
 mod app;
 mod db;
+mod misc;
 mod pages;
 mod serve_static;
 mod stats;
+
+const STATIC_PATH: &str = "./web/static";
 
 fn main() {
     trace::set_log_level(Level::Trace);
@@ -26,7 +29,7 @@ fn main() {
     let app = server.state.as_ref().unwrap().clone();
 
     Logger::new().attach(&mut server);
-    ServeStatic::new("./web/static").attach(&mut server);
+    ServeStatic::new(STATIC_PATH).attach(&mut server);
     Stats::new(app.clone()).attach(&mut server);
 
     pages::attach(&mut server);
