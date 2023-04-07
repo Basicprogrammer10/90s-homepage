@@ -19,7 +19,7 @@ mod pages;
 mod serve_static;
 mod stats;
 
-const STATIC_PATH: &str = "./web/static";
+const STATIC_PATH: &str = "./web";
 
 fn main() {
     trace::set_log_level(Level::Trace);

@@ -10,7 +10,7 @@ use crate::{
 const TOP_PAGES: u32 = 10;
 
 #[derive(Template)]
-#[template(path = "../web/templates/stats.html")]
+#[template(path = "stats.html")]
 struct StatsTemplate {
     pages: Vec<StatEntry>,
 }
