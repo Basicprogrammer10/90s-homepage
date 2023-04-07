@@ -1,4 +1,4 @@
-use std::{net::Ipv4Addr, process};
+use std::process;
 
 use afire::{
     extension::Logger,
@@ -19,17 +19,16 @@ mod pages;
 mod serve_static;
 mod stats;
 
-const STATIC_PATH: &str = "./web";
-
 fn main() {
     trace::set_log_level(Level::Trace);
-    let mut server = Server::<App>::new(Ipv4Addr::LOCALHOST, 8080)
-        .state(App::new())
+    let app = App::new();
+    let mut server = Server::<App>::new(app.config.host.as_str(), app.config.port)
+        .state(app)
         .keep_alive(false);
     let app = server.state.as_ref().unwrap().clone();
 
     Logger::new().attach(&mut server);
-    ServeStatic::new(STATIC_PATH).attach(&mut server);
+    ServeStatic::new(&app.config.static_path).attach(&mut server);
     Stats::new(app.clone()).attach(&mut server);
 
     pages::attach(&mut server);
