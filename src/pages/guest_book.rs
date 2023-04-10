@@ -1,6 +1,6 @@
 use std::borrow::Borrow;
 
-use afire::{HeaderType, Method, Query, Response, Server, Status};
+use afire::{Content, HeaderType, Method, Query, Response, Server, Status};
 
 use askama::Template;
 
@@ -31,6 +31,8 @@ pub fn attach(server: &mut Server<App>) {
         let template = GuestBookTemplate {
             entries: app.db().get_guestbook_entries(),
         };
-        Response::new().text(template.render().unwrap())
+        Response::new()
+            .text(template.render().unwrap())
+            .content(Content::HTML)
     });
 }

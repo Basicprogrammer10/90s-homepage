@@ -1,10 +1,12 @@
 use std::{
+    borrow::Borrow,
     collections::HashMap,
     fs::{self, File},
     path::{Path, PathBuf},
 };
 
-use afire::{Method, Response, Server};
+use afire::extension::serve_static::TYPES;
+use afire::{HeaderType, Method, Response, Server};
 
 use crate::app::App;
 
@@ -64,7 +66,17 @@ impl ServeStatic {
                         .text(format!("Not Found: {path:?}"))
                 }
             };
-            Response::new().stream(stream)
+            Response::new().stream(stream).header(
+                HeaderType::ContentType,
+                get_type(
+                    path.file_name()
+                        .unwrap_or_default()
+                        .to_string_lossy()
+                        .borrow(),
+                    &TYPES,
+                )
+                .unwrap_or_else(|| "application/octet-stream".to_owned()),
+            )
         });
     }
 }
@@ -76,4 +88,9 @@ fn safe_path(mut path: String) -> String {
         path = path.replace("/..", "");
     }
     path
+}
+
+fn get_type(path: &str, types: &[(&str, &str)]) -> Option<String> {
+    let ext = path.split('.').last()?;
+    Some(types.iter().find(|x| x.0 == ext)?.1.to_owned())
 }
