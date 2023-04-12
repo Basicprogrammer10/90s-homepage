@@ -7,7 +7,7 @@ use crate::misc;
 
 pub trait Database {
     // == Base ==
-    fn init(&self);
+    fn init(&mut self);
     fn cleanup(&self);
 
     // == Stats ==
@@ -20,27 +20,18 @@ pub trait Database {
 }
 
 impl Database for Connection {
-    fn init(&self) {
-        self.execute(
-            "CREATE TABLE IF NOT EXISTS stats (
-                path TEXT NOT NULL,
-                count INTEGER NOT NULL,
-                UNIQUE (path)
-            )",
-            [],
-        )
-        .unwrap();
-        self.execute(
-            "CREATE TABLE IF NOT EXISTS guestbook (
-                name TEXT NOT NULL,
-                message TEXT NOT NULL,
-                date INTEGER NOT NULL
-            )",
-            [],
-        )
-        .unwrap();
+    fn init(&mut self) {
         self.pragma_update(None, "journal_mode", "WAL").unwrap();
         self.pragma_update(None, "synchronous", "NORMAL").unwrap();
+
+        let trans = self.transaction().unwrap();
+        for i in [
+            include_str!("./sql/create_guestbook.sql"),
+            include_str!("./sql/create_stats.sql"),
+        ] {
+            trans.execute(i, []).unwrap();
+        }
+        trans.commit().unwrap();
     }
 
     fn cleanup(&self) {
