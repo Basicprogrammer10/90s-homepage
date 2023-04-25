@@ -4,9 +4,9 @@ version = 3
 
 [[package]]
 name = "afire"
-version = "2.0.0"
+version = "2.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "749dec06bad15d56cfc5117d83efe35064c1a5a72f22acce777760159e5f884d"
+checksum = "f345f4737cfda8976a7cf49bc1fe3e0987bfb7d26fdeff7497c95da48890521c"
 
 [[package]]
 name = "ahash"
