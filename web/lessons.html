@@ -1,108 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lessons</title>
-    <link rel="stylesheet" href="/style/common.css" />
 
-    <style>
-      div {
-        border-left: 1px solid #9a9a9a;
-        padding-left: 10px;
-      }
-    </style>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lessons</title>
+  <link rel="stylesheet" href="/style/common.css" />
 
-  <body>
-    <p><a href="/">home</a> &rsaquo; lessons</p>
+  <style>
+    div {
+      border-left: 1px solid #9a9a9a;
+      padding-left: 10px;
+    }
+  </style>
+</head>
 
-    <h1>Lessons</h1>
+<body>
+  <p><a href="/">home</a> &rsaquo; lessons</p>
 
-    <ul>
-      <li><a href="#headings">Headings</a></li>
-      <li><a href="#movie-summary">Movie Summary</a></li>
-      <li><a href="#lists">Lists</a></li>
-      <li><a href="#text-align">Text Align</a></li>
-      <li><a href="#hyperlinks">HyperLinks</a></li>
-      <li><a href="#images">Images</a></li>
+  <h1>Lessons</h1>
+
+  <ul>
+    <li><a href="#headings">Headings</a></li>
+    <li><a href="#movie-summary">Movie Summary</a></li>
+    <li><a href="#lists">Lists</a></li>
+    <li><a href="#text-align">Text Align</a></li>
+    <li><a href="#hyperlinks">HyperLinks</a></li>
+    <li><a href="#images">Images</a></li>
+    <li><a href="#table">Tables</a></li>
+  </ul>
+
+  <hr />
+
+  <div id="headings">
+    <h2>Headings</h2>
+    <h3>H3 Element</h3>
+    <h4>H4 Element</h4>
+    <h5>H5 Element</h5>
+    <h6>H6 Element</h6>
+  </div>
+
+  <div id="movie-summary">
+    <h2>Movie Summary (1992)</h2>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure nam quia
+      blanditiis earum iusto fuga quod provident. Voluptas rem laudantium id.
+      Nemo inventore facilis eum aperiam dicta consequatur iste laborum.
+    </p>
+  </div>
+
+  <div id="lists">
+    <h2>Lists</h2>
+
+    <ul type="square">
+      <li>One</li>
+      <li>Two</li>
+      <li>Three</li>
     </ul>
 
-    <hr />
+    <ol type="A">
+      <li>Four</li>
+      <li>Five</li>
+      <li>Six</li>
+    </ol>
 
-    <div id="headings">
-      <h2>Headings</h2>
-      <h3>H3 Element</h3>
-      <h4>H4 Element</h4>
-      <h5>H5 Element</h5>
-      <h6>H6 Element</h6>
-    </div>
+    <dl>
+      <dt>Mango</dt>
+      <dd>Juicy Fruit</dd>
+    </dl>
+  </div>
 
-    <div id="movie-summary">
-      <h2>Movie Summary (1992)</h2>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure nam quia
-        blanditiis earum iusto fuga quod provident. Voluptas rem laudantium id.
-        Nemo inventore facilis eum aperiam dicta consequatur iste laborum.
-      </p>
-    </div>
+  <div id="text-align">
+    <h2>Text Align</h2>
 
-    <div id="lists">
-      <h2>Lists</h2>
+    <p>Left aligned, like it should be.</p>
+    <p style="text-align: center;">This looks very bad, please dont center large text blocks.</p>
+    <p style="text-align: right;">Right aligned, it has its uses.</p>
+  </div>
 
-      <ul type="square">
-        <li>One</li>
-        <li>Two</li>
-        <li>Three</li>
-      </ul>
+  <div id="hyperlinks">
+    <h2>HyperLinks</h2>
 
-      <ol type="A">
-        <li>Four</li>
-        <li>Five</li>
-        <li>Six</li>
-      </ol>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="#">Back to Top</a></li>
+      <li><a href="https://github.com/basicprogrammer10/afire" target="_blank" rel="noreferrer">afire Github</a> (new
+        tab)</li>
+      <li><a href="mailto:connorslade@connorcode.com">E-Mail</a></li>
+    </ul>
+  </div>
 
-      <dl>
-        <dt>Mango</dt>
-        <dd>Juicy Fruit</dd>
-      </dl>
-    </div>
+  <div id="images">
+    <h2>Images</h2>
 
-    <div id="text-align">
-      <h2>Text Align</h2>
+    <p><em>flower.</em></p>
+    <img src="/assets/tulips.png" alt="Three tulips." />
+    <img src="/assets/sunflower.png" alt="One sunflower." />
+  </div>
 
-      <p>Left aligned, like it should be.</p>
-      <p style="text-align: center;">This looks very bad, please dont center large text blocks.</p>
-      <p style="text-align: right;">Right aligned, it has its uses.</p>
-    </div>
+  <div id="table">
+    <h2>Table</h2>
 
-    <div id="hyperlinks">
-      <h2>HyperLinks</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Sun</th>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>9</td>
+          <td>10</td>
+          <td>11</td>
+          <td>12</td>
+          <td>13</td>
+          <td>14</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>16</td>
+          <td>17</td>
+          <td>18</td>
+          <td>19</td>
+          <td>20</td>
+          <td>21</td>
+        </tr>
+        <tr>
+          <td>22</td>
+          <td>23</td>
+          <td>24</td>
+          <td>25</td>
+          <td>26</td>
+          <td>27</td>
+          <td>28</td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
 
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="#">Back to Top</a></li>
-        <li><a href="https://github.com/basicprogrammer10/afire" target="_blank" rel="noreferrer">afire Github</a> (new tab)</li>
-        <li><a href="mailto:connorslade@connorcode.com">E-Mail</a></li> 
-      </ul>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Expenses</th>
+          <th>Entertainment</th>
+          <th>Food</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>January</td>
+          <td>$15.34</td>
+          <td>$57.29</td>
+        </tr>
+        <tr>
+          <td>February</td>
+          <td>$26.35</td>
+          <td>$12.78</td>
+        </tr>
+        <tr>
+          <td>March</td>
+          <td>$45.42</td>
+          <td>$56.73</td>
+        </tr>
+        <tr>
+          <td>April</td>
+          <td>$38.40</td>
+          <td>$30.82</td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
 
-    <div id="images">
-      <h2>Images</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>A Day</th>
+          <th>B Day</th>
+          <th>C Day</th>
+          <th>D Day</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>English</td>
+          <td>U.S. History</td>
+          <td>Algebra II</td>
+          <td>PE / Health</td>
+        </tr>
+        <tr>
+          <td>PE / Health</td>
+          <td>English</td>
+          <td>U.S. History</td>
+          <td>Algebra II</td>
+        </tr>
+        <tr>
+          <td>Algebra II</td>
+          <td>PE / Health</td>
+          <td>English</td>
+          <td>U.S. History</td>
+        </tr>
+        
+        <tr>
+          <td>Latin II</td>
+          <td>Enriched Chemistry</td>
+          <td>AP Computer Science</td>
+          <td>Web Design</td>
+        </tr>
+        <tr>
+          <td>Web Design</td>
+          <td>Latin II</td>
+          <td>Enriched Chemistry</td>
+          <td>AP Computer Science</td>
+        </tr>
+        <tr>
+          <td>AP Computer Science</td>
+          <td>Web Design</td>
+          <td>Latin II</td>
+          <td>Enriched Chemistry</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-      <p><em>flower.</em></p>
-      <img src="/assets/tulips.png" alt="Three tulips." />
-      <img src="/assets/sunflower.png" alt="One sunflower." />
-    </div>
+  <hr />
+  <footer>
+    <a href="https://github.com/basicprogrammer10/afire">
+      <img src="./assets/afire.png" />
+    </a>
+    <img src="./assets/ie2.gif" />
+    <p>Connor Slade &ndash; 1992</p>
+  </footer>
+</body>
 
-    <hr />
-    <footer>
-      <a href="https://github.com/basicprogrammer10/afire">
-        <img src="./assets/afire.png" />
-      </a>
-      <img src="./assets/ie2.gif" />
-      <p>Connor Slade &ndash; 1992</p>
-    </footer>
-  </body>
 </html>
