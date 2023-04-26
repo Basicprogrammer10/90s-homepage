@@ -34,7 +34,7 @@ impl ServeStatic {
 
         Self {
             data_dir: dir,
-            serve_path: "/".to_owned() + "**",
+            serve_path: "**".to_owned(),
             page_cache: html_cache,
         }
     }

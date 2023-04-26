@@ -1,7 +1,6 @@
 use std::process;
 
 use afire::{
-    extension::Logger,
     trace::{self, Level},
     Middleware, Server,
 };
@@ -14,10 +13,12 @@ use crate::db::Database;
 
 mod app;
 mod db;
+mod logger;
 mod misc;
 mod pages;
 mod serve_static;
 mod stats;
+use logger::Logger;
 
 fn main() {
     trace::set_log_level(Level::Trace);
@@ -27,7 +28,7 @@ fn main() {
         .keep_alive(false);
     let app = server.state.as_ref().unwrap().clone();
 
-    Logger::new().attach(&mut server);
+    Logger.attach(&mut server);
     ServeStatic::new(&app.config.static_path).attach(&mut server);
     Stats::new(app.clone()).attach(&mut server);
 
