@@ -12,6 +12,18 @@
         border-left: 1px solid #9a9a9a;
         padding-left: 10px;
       }
+
+      h2:hover a.anchor::before {
+        position: absolute;
+        margin-left: -1em;
+        text-decoration: underline;
+        content: "¶";
+      }
+
+      h2 {
+        margin-left: -1em;
+        padding-left: 1em;
+      }
     </style>
   </head>
 
@@ -34,7 +46,10 @@
     <hr />
 
     <div id="headings">
-      <h2>Headings</h2>
+      <h2>
+        <a class="anchor" href="#headings"></a>
+        Headings
+      </h2>
       <h3>H3 Element</h3>
       <h4>H4 Element</h4>
       <h5>H5 Element</h5>
@@ -42,7 +57,10 @@
     </div>
 
     <div id="movie-summary">
-      <h2>Movie Summary (1992)</h2>
+      <h2>
+        <a class="anchor" href="#movie-summary"></a>
+        Movie Summary (1992)
+      </h2>
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure nam quia
         blanditiis earum iusto fuga quod provident. Voluptas rem laudantium id.
@@ -51,7 +69,10 @@
     </div>
 
     <div id="lists">
-      <h2>Lists</h2>
+      <h2>
+        <a class="anchor" href="#lists"></a>
+        Lists
+      </h2>
 
       <ul type="square">
         <li>One</li>
@@ -72,7 +93,10 @@
     </div>
 
     <div id="text-align">
-      <h2>Text Align</h2>
+      <h2>
+        <a class="anchor" href="#text-align"></a>
+        Text Align
+      </h2>
 
       <p>Left aligned, like it should be.</p>
       <p style="text-align: center">
@@ -82,7 +106,10 @@
     </div>
 
     <div id="hyperlinks">
-      <h2>HyperLinks</h2>
+      <h2>
+        <a class="anchor" href="#hyperlinks"></a>
+        HyperLinks
+      </h2>
 
       <ul>
         <li><a href="/">Home</a></li>
@@ -101,7 +128,10 @@
     </div>
 
     <div id="images">
-      <h2>Images</h2>
+      <h2>
+        <a class="anchor" href="#images"></a>
+        Images
+      </h2>
 
       <p><em>flower.</em></p>
       <img src="/assets/tulips.png" alt="Three tulips." />
@@ -109,7 +139,10 @@
     </div>
 
     <div id="table">
-      <h2>Table</h2>
+      <h2>
+        <a class="anchor" href="#table"></a>
+        Table
+      </h2>
 
       <table>
         <thead>
@@ -167,39 +200,6 @@
       <table>
         <thead>
           <tr>
-            <th>Expenses</th>
-            <th>Entertainment</th>
-            <th>Food</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>January</td>
-            <td>$15.34</td>
-            <td>$57.29</td>
-          </tr>
-          <tr>
-            <td>February</td>
-            <td>$26.35</td>
-            <td>$12.78</td>
-          </tr>
-          <tr>
-            <td>March</td>
-            <td>$45.42</td>
-            <td>$56.73</td>
-          </tr>
-          <tr>
-            <td>April</td>
-            <td>$38.40</td>
-            <td>$30.82</td>
-          </tr>
-        </tbody>
-      </table>
-      <br />
-
-      <table>
-        <thead>
-          <tr>
             <th>A Day</th>
             <th>B Day</th>
             <th>C Day</th>
@@ -249,17 +249,23 @@
     </div>
 
     <div id="best-season">
-      <h2>The Best Season: <u>Winter</u></h2>
+      <h2>
+        <a class="anchor" href="#best-season"></a>
+        The Best Season: <u>winter</u>
+      </h2>
+      <img src="/assets/winter-landscape.png" style="width: 100%" />
 
-      <div style="display: flex">
+      <div style="display: flex; margin-top: 5px">
         <div>
-          <p>
-            My <em>favorite season</em> is winter because I love the cold
-            weather, the snow, and the festivities that come with the holiday
-            season. During the winter, I enjoy skiing, snowshoeing, and making
-            snowmen with my family. My favorite winter memory is going on a
-            family ski trip to Vermont - the snow was perfect, the slopes were
-            challenging, and the hot cocoa was delicious!
+          <p style="margin-top: 0">
+            My <em>favorite season</em> is
+            <a href="https://en.wikipedia.org/wiki/Winter">Winter</a>! This is
+            because I love the colder weather, the snow, and the holiday
+            festivities that come with the season. During the winter, I enjoy
+            skiing, making snowmen and sledding with my family. My favorite
+            winter memory is going on a family ski trip to Vermont - the snow
+            was perfect, the slopes were challenging, and the hot cocoa was
+            delicious!
           </p>
 
           <p>

@@ -1,5 +1,6 @@
 host = "localhost"
 port = 8080
+threads = 4
 
 db_path = "./data.db"
 static_path = "./web"

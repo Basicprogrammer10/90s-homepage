@@ -13,6 +13,12 @@ p {
   text-align: justify;
 }
 
+img {
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
 footer {
   width: min(90vw, 750px);
   display: flex;
