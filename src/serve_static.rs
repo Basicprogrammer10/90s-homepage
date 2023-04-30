@@ -1,5 +1,5 @@
 use std::{
-    borrow::Borrow,
+    borrow::Cow,
     collections::HashMap,
     fs::{self, File},
     path::{Path, PathBuf},
@@ -42,15 +42,10 @@ impl ServeStatic {
     pub fn attach(self, server: &mut Server<App>) {
         let serve_path = self.serve_path.to_owned();
         server.route(Method::GET, serve_path, move |req| {
-            let path = safe_path(
-                req.path
-                    .strip_prefix(&self.serve_path)
-                    .unwrap_or(&req.path)
-                    .to_owned(),
-            )
-            .strip_prefix('/')
-            .unwrap_or_default()
-            .to_owned();
+            let path = safe_path(req.path.strip_prefix(&self.serve_path).unwrap_or(&req.path))
+                .strip_prefix('/')
+                .unwrap_or_default()
+                .to_owned();
 
             let path = self
                 .page_cache
@@ -58,7 +53,10 @@ impl ServeStatic {
                 .map(|x| x.to_path_buf())
                 .unwrap_or_else(|| self.data_dir.join(path));
 
-            let stream = match File::open(&path) {
+            let file_name = path.file_name().unwrap_or_default().to_string_lossy();
+            let content_type = get_type(&file_name, &TYPES);
+
+            let file = match File::open(&path) {
                 Ok(file) => file,
                 Err(_) => {
                     return Response::new()
@@ -66,31 +64,39 @@ impl ServeStatic {
                         .text(format!("Not Found: {path:?}"))
                 }
             };
-            Response::new().stream(stream).header(
+
+            let mut res = Response::new();
+            if let Ok(i) = file.metadata() {
+                res.headers.add("Content-Length", i.len().to_string());
+            }
+
+            res.stream(file).header(
                 HeaderType::ContentType,
-                get_type(
-                    path.file_name()
-                        .unwrap_or_default()
-                        .to_string_lossy()
-                        .borrow(),
-                    &TYPES,
-                )
-                .unwrap_or_else(|| "application/octet-stream".to_owned()),
+                content_type.unwrap_or("application/octet-stream"),
             )
         });
     }
 }
 
-// dont look too closely
-fn safe_path(mut path: String) -> String {
-    path = path.replace('\\', "/");
-    while path.contains("/..") {
-        path = path.replace("/..", "");
+pub fn safe_path(path: &str) -> Cow<'_, str> {
+    if !path.contains("..") {
+        return Cow::Borrowed(path);
     }
-    path
+
+    let mut out = Vec::new();
+    for i in path.split(['/', '\\']) {
+        match i {
+            ".." => {
+                out.pop();
+            }
+            _ => out.push(i),
+        }
+    }
+
+    Cow::Owned(out.join("/"))
 }
 
-fn get_type(path: &str, types: &[(&str, &str)]) -> Option<String> {
-    let ext = path.split('.').last()?;
-    Some(types.iter().find(|x| x.0 == ext)?.1.to_owned())
+fn get_type<'a>(path: &str, types: &'a [(&str, &str)]) -> Option<&'a str> {
+    let ext = path.rsplit('.').next()?;
+    Some(types.iter().find(|x| x.0 == ext)?.1)
 }

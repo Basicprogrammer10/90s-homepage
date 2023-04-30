@@ -15,6 +15,7 @@ pub struct App {
 pub struct Config {
     pub host: String,
     pub port: u16,
+    pub threads: usize,
 
     pub db_path: String,
     pub static_path: String,

@@ -1,6 +1,7 @@
 use std::process;
 
 use afire::{
+    extension::Date,
     trace::{self, Level},
     Middleware, Server,
 };
@@ -23,15 +24,15 @@ use logger::Logger;
 fn main() {
     trace::set_log_level(Level::Trace);
     let app = App::new();
-    let mut server = Server::<App>::new(app.config.host.as_str(), app.config.port)
-        .state(app)
-        .keep_alive(false);
-    let app = server.state.as_ref().unwrap().clone();
+    let threads = app.config.threads;
 
+    let mut server = Server::<App>::new(app.config.host.as_str(), app.config.port).state(app);
+    let app = server.app();
+
+    Date.attach(&mut server);
     Logger.attach(&mut server);
     ServeStatic::new(&app.config.static_path).attach(&mut server);
     Stats::new(app.clone()).attach(&mut server);
-
     pages::attach(&mut server);
 
     ctrlc::set_handler(move || {
@@ -41,5 +42,5 @@ fn main() {
     })
     .unwrap();
 
-    server.start().unwrap();
+    server.start_threaded(threads).unwrap();
 }
