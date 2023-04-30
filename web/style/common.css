@@ -1,5 +1,5 @@
 body {
-  width: min(90vw, 1000px);
+  width: min(90vw, 750px);
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -14,16 +14,35 @@ p {
 }
 
 footer {
-  width: min(90vw, 1000px);
+  width: min(90vw, 750px);
   display: flex;
   height: 15px;
 }
-
 footer img {
   margin-right: 5px;
 }
-
 footer p {
   margin: 0;
   margin-left: auto;
 }
+
+table {
+  border-collapse: collapse;
+}
+table td, table th {
+  border: 1px solid #000;
+  padding: 5px;
+  border-collapse: collapse;
+  text-align: center;
+}
+table thead tr {
+  background: #d8d8d8;
+}
+table thead trth {
+  padding: 5px 10px 5px 10px;
+}
+table tbody tr:nth-child(even) {
+  background: #e9e9e9;
+}
+
+/*# sourceMappingURL=common.css.map */

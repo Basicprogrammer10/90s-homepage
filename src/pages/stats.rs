@@ -1,4 +1,4 @@
-use afire::{Method, Response, Server};
+use afire::{Content, Method, Response, Server};
 
 use askama::Template;
 
@@ -19,7 +19,9 @@ pub fn attach(server: &mut Server<App>) {
     server.stateful_route(Method::GET, "/stats", |app, _res| {
         let stats = app.db().top_pages(TOP_PAGES);
         let template = StatsTemplate { pages: stats };
-        Response::new().text(template.render().unwrap())
+        Response::new()
+            .text(template.render().unwrap())
+            .content(Content::HTML)
     });
 }
 
