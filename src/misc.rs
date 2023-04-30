@@ -1,3 +1,5 @@
+use std::borrow::Cow;
+
 const TIME_UNITS: &[(&str, u16)] = &[
     ("second", 60),
     ("minute", 60),
@@ -21,9 +23,9 @@ impl TryStrip for str {
     }
 }
 
-pub fn best_time(secs: u64) -> String {
+pub fn best_time(secs: u64) -> Cow<'static, str> {
     if secs <= 1 {
-        return "just now".to_owned();
+        return Cow::Borrowed("just now");
     }
 
     let mut secs = secs as f64;
@@ -31,11 +33,15 @@ pub fn best_time(secs: u64) -> String {
     for i in TIME_UNITS {
         if i.1 == 0 || secs < i.1 as f64 {
             secs = secs.round();
-            return format!("{} {}{} ago", secs, i.0, if secs > 1.0 { "s" } else { "" });
+            return Cow::Owned(format!(
+                "{secs} {}{} ago",
+                i.0,
+                if secs > 1.0 { "s" } else { "" }
+            ));
         }
 
         secs /= i.1 as f64;
     }
 
-    format!("{} years ago", secs.round())
+    Cow::Owned(format!("{} years ago", secs.round()))
 }

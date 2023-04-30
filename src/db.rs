@@ -88,7 +88,8 @@ impl Database for Connection {
                         .unwrap()
                         .as_secs()
                         .saturating_sub(date),
-                ),
+                )
+                .into_owned(),
             })
             .collect()
     }

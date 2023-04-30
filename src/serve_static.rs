@@ -5,8 +5,8 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use afire::extension::serve_static::TYPES;
-use afire::{HeaderType, Method, Response, Server};
+use afire::{extension::serve_static::TYPES, Content};
+use afire::{Method, Response, Server};
 
 use crate::app::App;
 
@@ -70,10 +70,9 @@ impl ServeStatic {
                 res.headers.add("Content-Length", i.len().to_string());
             }
 
-            res.stream(file).header(
-                HeaderType::ContentType,
+            res.stream(file).content(Content::Custom(
                 content_type.unwrap_or("application/octet-stream"),
-            )
+            ))
         });
     }
 }
