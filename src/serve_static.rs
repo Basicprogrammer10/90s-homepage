@@ -5,8 +5,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use afire::{extension::serve_static::TYPES, Content};
-use afire::{Method, Response, Server};
+use afire::{extension::serve_static::TYPES, Content, Method, Response, Server};
 
 use crate::app::App;
 
